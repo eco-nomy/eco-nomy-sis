@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-public class SaldarPix extends PanacheEntity {
+public class SaquePix extends PanacheEntity {
     public Long userId;
     public BigDecimal quantia;
     public String chavePix;
