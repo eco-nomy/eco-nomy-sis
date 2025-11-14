@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-public class PagamentoInterno extends PanacheEntity {
+public class Pagamento extends PanacheEntity {
     public Long corporacaoId;
     public Long userId;
     public BigDecimal quantia;
