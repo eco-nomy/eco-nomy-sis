@@ -1,4 +1,4 @@
-pckage com.economy.domain.model;
+package com.economy.domain.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
