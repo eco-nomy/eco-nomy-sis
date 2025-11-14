@@ -1,4 +1,4 @@
-package com.economy.dto;
+package com.economy.dto.input;
 
 import java.math.BigDecimal;
 
