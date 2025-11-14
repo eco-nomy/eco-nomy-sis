@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Entity
 public class SaldarPix extends PanacheEntity {
     public Long userId;
-    public BigDecimal quantidade;
+    public BigDecimal quantia;
     public String chavePix;
     public String status; // PENDING, SENT, FAILED
     public String mpOperationId;

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class PagamentoInterno extends PanacheEntity {
     public Long corporacaoId;
     public Long userId;
-    public BigDecimal quantidade;
+    public BigDecimal quantia;
     public String status; // PENDING, COMPLETED, FAILED
     public LocalDateTime dataCriacao = LocalDateTime.now();
 }
