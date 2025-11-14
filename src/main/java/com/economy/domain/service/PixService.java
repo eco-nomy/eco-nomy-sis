@@ -1,6 +1,5 @@
 package com.economy.domain.service;
 
-import com.economy.domain.model.SaldarPix;
 import com.economy.domain.model.SaquePix;
 
 import java.math.BigDecimal;
