@@ -1,4 +1,4 @@
-package com.economy.domain.service;
+package com.economy.infrastructure.api.rest;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.Path;
