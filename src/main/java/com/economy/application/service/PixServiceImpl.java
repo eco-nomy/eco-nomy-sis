@@ -1,6 +1,5 @@
 package com.economy.application.service;
 
-import com.economy.domain.model.SaldarPix;
 import com.economy.domain.model.SaquePix;
 import com.economy.domain.service.CarteiraService;
 import com.economy.domain.service.MercadoPagoClient;
@@ -32,7 +31,7 @@ public class PixServiceImpl implements PixService {
                 "description", "Corp top-up",
                 "payment_method_id", "pix" // simplified
         );
-        return mercadoPagoClient.createPayment(payload);
+        return mercadoPagoClient.createPagamento(payload);
     }
 
     @Override
