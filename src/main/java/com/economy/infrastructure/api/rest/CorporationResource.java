@@ -2,9 +2,11 @@ package com.economy.infrastructure.api.rest;
 
 import com.economy.domain.service.CarteiraService;
 import com.economy.domain.service.PixService;
+import com.economy.dto.output.QrCodePixParaPagamento;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -28,10 +30,10 @@ public class CorporationResource {
 
     @POST
     @Path("/{id}/create-pix-qr")
-    public Map<String, Object> createPixQr(@PathParam("id") Long id,
-                                           Map<String, Object> body) {
-        BigDecimal amount = new BigDecimal(body.get("amount").toString());
-        return pixService.criarPixQRCode(id, amount);
+    public Response createPixQr(@PathParam("id") Long corpId,
+                                              Map<String, Object> body) throws Exception {
+        BigDecimal amount = new BigDecimal(body.get("quantia").toString());
+        return Response.ok(pixService.criarPixQRCode(corpId, amount)).build();
     }
 
 }

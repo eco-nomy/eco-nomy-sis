@@ -2,10 +2,12 @@ package com.economy.application.service;
 
 import com.economy.domain.model.SaquePix;
 import com.economy.domain.service.CarteiraService;
-import com.economy.domain.service.MercadoPagoClient;
+import com.economy.dto.output.QrCodePixParaPagamento;
+import com.economy.infrastructure.api.rest.MercadoPagoClient;
 import com.economy.domain.service.PixService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.math.BigDecimal;
@@ -23,15 +25,16 @@ public class PixServiceImpl implements PixService {
     //TODO: Aprender e aplicar o uso da api do MercadoPago
 
     @Override
-    public Map<String, Object> criarPixQRCode(Long corpId, BigDecimal amount) {
+    public QrCodePixParaPagamento criarPixQRCode(Long corpId, BigDecimal amount) throws Exception {
         // Example: create a payment preference for corporation to pay into platform
         // See Mercado Pago "Create a payment" / "Create a QR Code" endpoints for exact payload
         Map<String, Object> payload = Map.of(
                 "transaction_amount", amount,
                 "description", "Corp top-up",
-                "payment_method_id", "pix" // simplified
+                "payment_method_id", "pix"// simplified
         );
-        return mercadoPagoClient.createPagamento(payload);
+        QrCodePixParaPagamento qrCodePixParaPagamento= mercadoPagoClient.createPagamento(payload);
+        return qrCodePixParaPagamento;
     }
 
     @Override
