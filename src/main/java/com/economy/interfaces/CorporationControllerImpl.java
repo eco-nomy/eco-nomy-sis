@@ -40,6 +40,6 @@ public class CorporationControllerImpl implements CorporationController{
                 email,
                 firstName,
                 cnpj);
-        return Response.ok().build();
+        return Response.ok(qrCodePixParaPagamento).build();
     }
 }

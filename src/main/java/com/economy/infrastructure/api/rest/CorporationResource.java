@@ -27,6 +27,8 @@ public class CorporationResource {
     @Path("/{id}/create-pix-qr")
     public Response createPixQr(@PathParam("id") Long corpId,
                                               Map<String, Object> body) throws Exception {
+
+
         return corporationController.createPixQr(corpId, body);
     }
 
