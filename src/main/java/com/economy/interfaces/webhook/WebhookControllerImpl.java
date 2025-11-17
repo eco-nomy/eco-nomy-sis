@@ -4,10 +4,12 @@ import com.mercadopago.client.payment.PaymentClient;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.payment.Payment;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.Response;
 
 import java.util.Map;
 
+@ApplicationScoped
 public class WebhookControllerImpl implements WebhookController{
     public Response receive(Map<String, Object> payload) throws MPException, MPApiException {
         // Implement verification using mp.webhook.secret if configured

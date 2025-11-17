@@ -3,6 +3,7 @@ package com.economy.infrastructure.api.rest;
 import com.economy.domain.model.Pagamento;
 import com.economy.domain.service.PagamentoService;
 import com.economy.dto.input.PagamentoRequest;
+import com.economy.interfaces.PagamentoController;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -15,11 +16,14 @@ import jakarta.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 public class PagamentoResource {
 
-    @Inject
-    PagamentoService pagamentoService;
+    private final PagamentoController pagamentoController;
+
+    public PagamentoResource(PagamentoController pagamentoController) {
+        this.pagamentoController = pagamentoController;
+    }
 
     @POST
     public Pagamento pagar(PagamentoRequest pagamentoRequest){
-        return pagamentoService.makeInternalPayment(pagamentoRequest);
+        return pagamentoController.pagar(pagamentoRequest);
     }
 }

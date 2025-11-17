@@ -2,12 +2,11 @@ package com.economy.application.service;
 
 import com.economy.domain.model.SaquePix;
 import com.economy.domain.service.CarteiraService;
-import com.economy.dto.output.QrCodePixParaPagamento;
-import com.economy.infrastructure.api.rest.MercadoPagoClient;
 import com.economy.domain.service.PixService;
+import com.economy.dto.output.QrCodePixParaPagamento;
+import com.economy.infrastructure.api.restclient.MercadoPagoClient;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.math.BigDecimal;

@@ -4,12 +4,14 @@ import com.economy.domain.model.ContaUsuario;
 import com.economy.domain.model.SaquePix;
 import com.economy.domain.service.CarteiraService;
 import com.economy.domain.service.PixService;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 
 import java.util.Map;
 
+@ApplicationScoped
 public class SacarControllerImpl implements SacarController {
 
     @Inject
