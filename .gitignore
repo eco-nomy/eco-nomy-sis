@@ -46,3 +46,4 @@ nb-configuration.xml
 
 # Arquivo de sessão do nvim
 eco-nomy-sis.session
+/src/main/resources/application.properties

@@ -2,6 +2,7 @@ package com.economy.interfaces;
 
 import com.economy.domain.service.CarteiraService;
 import com.economy.domain.service.PixService;
+import com.economy.dto.output.QrCodePixParaPagamento;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
@@ -30,6 +31,15 @@ public class CorporationControllerImpl implements CorporationController{
     public Response createPixQr(@PathParam("id") Long corpId,
                                 Map<String, Object> body) throws Exception {
         BigDecimal amount = new BigDecimal(body.get("quantia").toString());
-        return Response.ok(pixService.criarPixQRCode(corpId, amount)).build();
+        String email = (String) body.get("email");
+        String firstName = (String) body.get("firstName");
+        String cnpj = (String) body.get("cnpj");
+        QrCodePixParaPagamento qrCodePixParaPagamento = pixService.criarPixQRCode(
+                corpId,
+                amount,
+                email,
+                firstName,
+                cnpj);
+        return Response.ok().build();
     }
 }

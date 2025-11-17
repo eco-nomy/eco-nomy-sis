@@ -2,12 +2,11 @@ package com.economy.application.service;
 
 import com.economy.domain.model.SaquePix;
 import com.economy.domain.service.CarteiraService;
+import com.economy.domain.service.MercadoPagoService;
 import com.economy.domain.service.PixService;
 import com.economy.dto.output.QrCodePixParaPagamento;
-import com.economy.infrastructure.api.restclient.MercadoPagoClient;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -16,23 +15,24 @@ import java.util.Map;
 public class PixServiceImpl implements PixService {
 
     @Inject
-    @RestClient
-    MercadoPagoClient mercadoPagoClient;
+    CarteiraService carteiraService;
 
     @Inject
-    CarteiraService carteiraService;
-    //TODO: Aprender e aplicar o uso da api do MercadoPago
+    MercadoPagoService mercadoPagoService;
 
     @Override
-    public QrCodePixParaPagamento criarPixQRCode(Long corpId, BigDecimal amount) throws Exception {
+    public QrCodePixParaPagamento criarPixQRCode(Long corpId, BigDecimal amount, String email, String firstName, String cnpj) throws Exception {
         // Example: create a payment preference for corporation to pay into platform
         // See Mercado Pago "Create a payment" / "Create a QR Code" endpoints for exact payload
         Map<String, Object> payload = Map.of(
+                "email", email,
+                "first_name", firstName,
+                "number", cnpj,
                 "transaction_amount", amount,
                 "description", "Corp top-up",
                 "payment_method_id", "pix"// simplified
         );
-        QrCodePixParaPagamento qrCodePixParaPagamento= mercadoPagoClient.createPagamento(payload);
+        QrCodePixParaPagamento qrCodePixParaPagamento= mercadoPagoService.createPagamento(payload);
         return qrCodePixParaPagamento;
     }
 
@@ -44,7 +44,7 @@ public class PixServiceImpl implements PixService {
                 "description", "User withdrawal",
                 "additional_info", Map.of("pix", pixKey)
         );
-        return mercadoPagoClient.createPayout(payload);
+        return mercadoPagoService.createPayout(payload);
     }
 
     @Override
