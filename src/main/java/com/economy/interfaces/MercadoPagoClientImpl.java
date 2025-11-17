@@ -1,6 +1,7 @@
-package com.economy.infrastructure.api.rest;
+package com.economy.interfaces;
 
 import com.economy.dto.output.QrCodePixParaPagamento;
+import com.economy.infrastructure.api.rest.MercadoPagoClient;
 import com.mercadopago.MercadoPagoConfig;
 import com.mercadopago.client.common.IdentificationRequest;
 import com.mercadopago.client.payment.PaymentClient;
@@ -8,18 +9,15 @@ import com.mercadopago.client.payment.PaymentCreateRequest;
 import com.mercadopago.client.payment.PaymentPayerRequest;
 import com.mercadopago.core.MPRequestOptions;
 import com.mercadopago.resources.payment.Payment;
-import jakarta.ws.rs.core.Response;
-import lombok.Value;
 import org.eclipse.microprofile.config.ConfigProvider;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class MercadoPagoClientImpl implements MercadoPagoClient{
+public class MercadoPagoClientImpl implements MercadoPagoController {
 
     private String mercadoPagoToken = ConfigProvider.getConfig().getValue("mercadopago.token", String.class);
 

@@ -4,6 +4,7 @@ import com.economy.domain.model.ContaUsuario;
 import com.economy.domain.model.SaquePix;
 import com.economy.domain.service.CarteiraService;
 import com.economy.domain.service.PixService;
+import com.economy.interfaces.SacarController;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -17,31 +18,14 @@ import java.util.Map;
 @Consumes(MediaType.APPLICATION_JSON)
 public class SacarResource {
 
-    @Inject
-    PixService pixService;
+    private final SacarController sacarController;
 
-    @Inject
-    CarteiraService carteiraService;
+    public SacarResource(SacarController sacarController) {
+        this.sacarController = sacarController;
+    }
 
     @POST
     public SaquePix sacar(SaquePix saquePix){
-        ContaUsuario contaUsuario = carteiraService.findUser(saquePix.userId);
-        if (contaUsuario == null) throw new WebApplicationException(Response.Status.NOT_FOUND);
-        if (contaUsuario.balance.compareTo(saquePix.quantia) < 0) throw new
-                WebApplicationException("Saldo insuficiente", 400);
-
-        contaUsuario.balance =  contaUsuario.balance.subtract(saquePix.quantia);
-        contaUsuario.persist();
-
-        SaquePix relatorioSaque = pixService.criarRelatorioSaque(saquePix.userId, saquePix.chavePix,
-                saquePix.quantia);
-
-        Map<String, Object> mercadoPagoResponse = pixService.enviarPixPagamento(saquePix.chavePix, saquePix.quantia);
-
-        relatorioSaque.mpOperationId = mercadoPagoResponse.getOrDefault("id", "").toString();
-        relatorioSaque.status = "SENT";
-        relatorioSaque.persist();
-
-        return relatorioSaque;
+        return sacarController.sacar(saquePix);
     }
 }
